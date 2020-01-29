@@ -6,7 +6,7 @@
 #    By: jhallama <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:10:31 by jhallama          #+#    #+#              #
-#    Updated: 2020/01/29 16:30:33 by jhallama         ###   ########.fr        #
+#    Updated: 2020/01/29 17:00:19 by jhallama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ HEADERS = -I fdf.h
 
 OBJ = $(SRC:.c=.o)
 
+MLX = /usr/local/lib/ -l mlx -framework OpenGL -framework AppKit
+
 .PHONY: all clean fclean re
 
 all: $(NAME)
@@ -28,7 +30,7 @@ $(NAME):
 	@gcc -Wall -Wextra -Werror -c $(SRC) $(HEADERS)
 	@ar -rc library.a $(OBJ)
 	@ranlib library.a
-	@gcc -Wall -Wextra -Werror library.a libft/libft.a libft/ft_printf/ft_printf.a $(SRC) $(HEADERS) -o $(NAME)
+	@gcc -Wall -Wextra -Werror library.a libft/libft.a libft/ft_printf/ft_printf.a $(SRC) $(HEADERS) -L $(MLX) -o $(NAME)
 	@echo "Made evvvrything!"
 
 clean:
