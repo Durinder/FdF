@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 14:23:57 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:25:10 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-# define RANGE_CHANGE(x,a,b,min,max) (((b)-(a))*((x)-(min))/((max)-(min)))+(a)
 # define WINDOW_W 1280
 # define WINDOW_H 780
 # define BORDER 10
