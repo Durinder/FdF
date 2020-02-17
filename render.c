@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:34:17 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 14:18:24 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:48:16 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void		pixel_put(int x, int y, t_image *image, int color)
 {
 	int		i;
 
-	if (x >= BORDER && x < WINDOW_W - BORDER &&
-			y >= BORDER && y < WINDOW_H - BORDER)
+	if (x >= 0 && x < WINDOW_W &&
+			y >= 0 && y < WINDOW_H)
 	{
 		i = (x * image->bpp / 8) + (y * image->size_line);
 		image->data_addr[i] = color;
@@ -62,15 +62,13 @@ static void		draw_line(t_point p0, t_point p1, t_image *image)
 	}
 }
 
-static t_image	*init_image(t_mlx *mlx)
+static t_image	init_image(t_mlx *mlx)
 {
-	t_image	*image;
+	t_image	image;
 
-	if (!(image = (t_image *)malloc(sizeof(t_image))))
-		error_exit("Couldn't malloc() for image");
-	image->ptr = mlx_new_image(mlx->mlx_ptr, WINDOW_W, WINDOW_H);
-	image->data_addr = mlx_get_data_addr(image->ptr, &image->bpp,
-			&image->size_line, &image->endian);
+	image.ptr = mlx_new_image(mlx->mlx_ptr, WINDOW_W, WINDOW_H);
+	image.data_addr = mlx_get_data_addr(image.ptr, &image.bpp,
+			&image.size_line, &image.endian);
 	return (image);
 }
 
@@ -79,22 +77,22 @@ void			render(t_mlx *mlx)
 	int		i;
 	int		j;
 
-	mlx->image = *init_image(mlx);
+	mlx->image = init_image(mlx);
 	i = -1;
 	while (mlx->map[++i])
 	{
 		j = -1;
 		while (mlx->map[i][++j])
 		{
-			if (mlx->map[i + 1])
-			{
-				draw_line(project(create_point(j, i, mlx), mlx),
-					project(create_point(j, i + 1, mlx), mlx), &mlx->image);
-			}
 			if (mlx->map[i][j + 1])
 			{
 				draw_line(project(create_point(j, i, mlx), mlx),
 					project(create_point(j + 1, i, mlx), mlx), &mlx->image);
+			}
+			if (mlx->map[i + 1] && mlx->map[i + 1][j])
+			{
+				draw_line(project(create_point(j, i, mlx), mlx),
+					project(create_point(j, i + 1, mlx), mlx), &mlx->image);
 			}
 		}
 	}

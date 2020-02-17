@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 14:25:10 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:44:28 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # define WINDOW_W 1280
 # define WINDOW_H 780
-# define BORDER 10
+# define BORDER 50
 
 typedef struct	s_point {
 	int	x;
