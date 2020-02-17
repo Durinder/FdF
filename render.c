@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:34:17 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/14 16:20:11 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:18:24 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,10 @@ static t_image	*init_image(t_mlx *mlx)
 
 void			render(t_mlx *mlx)
 {
-	t_image	*image;
 	int		i;
 	int		j;
 
-	image = init_image(mlx);
+	mlx->image = *init_image(mlx);
 	i = -1;
 	while (mlx->map[++i])
 	{
@@ -90,15 +89,15 @@ void			render(t_mlx *mlx)
 			if (mlx->map[i + 1])
 			{
 				draw_line(project(create_point(j, i, mlx), mlx),
-					project(create_point(j, i + 1, mlx), mlx), image);
+					project(create_point(j, i + 1, mlx), mlx), &mlx->image);
 			}
 			if (mlx->map[i][j + 1])
 			{
 				draw_line(project(create_point(j, i, mlx), mlx),
-					project(create_point(j + 1, i, mlx), mlx), image);
+					project(create_point(j + 1, i, mlx), mlx), &mlx->image);
 			}
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
-			image->ptr, BORDER, BORDER);
+			mlx->image.ptr, BORDER, BORDER);
 }

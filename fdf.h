@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/14 16:36:47 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:36:56 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef struct	s_point {
 	int	color;
 }				t_point;
 
+typedef struct s_image {
+	void	*ptr;
+	char	*data_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}				t_image;
+
 typedef struct	s_mlx {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -37,15 +45,8 @@ typedef struct	s_mlx {
 	int		h;
 	int		ratio;
 	char	projection;
+	t_image	image;
 }				t_mlx;
-
-typedef struct s_image {
-	void	*ptr;
-	char	*data_addr;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}				t_image;
 
 t_mlx			*file_reader(char *input);
 //int				***create_int_array(t_mlx *mlx);
