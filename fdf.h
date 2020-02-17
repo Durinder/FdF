@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 13:36:56 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:23:57 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct	s_point {
 	int	color;
 }				t_point;
 
-typedef struct s_image {
+typedef struct	s_image {
 	void	*ptr;
 	char	*data_addr;
 	int		bpp;
@@ -49,11 +49,7 @@ typedef struct	s_mlx {
 }				t_mlx;
 
 t_mlx			*file_reader(char *input);
-//int				***create_int_array(t_mlx *mlx);
 void			error_exit(char *reason);
-//int				width(t_mlx *mlx);
-//int				height(t_mlx *mlx);
 void			render(t_mlx *mlx);
 t_point			project(t_point point, t_mlx *mlx);
-//void			draw_map(t_mlx *mlx);
 #endif

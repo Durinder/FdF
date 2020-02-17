@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:58:40 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 13:22:03 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:23:08 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_point	iso(t_point point, t_mlx *mlx)
 
 static t_point	top_down(t_point point, t_mlx *mlx)
 {
-	point.x = point.x * mlx->ratio + BORDER;	
+	point.x = point.x * mlx->ratio + BORDER;
 	point.y = point.y * mlx->ratio + BORDER - point.z;
 	return (point);
 }
