@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/10 17:26:12 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:36:47 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,41 @@
 # include <fcntl.h>
 # include <stdio.h>
 # define RANGE_CHANGE(x,a,b,min,max) (((b)-(a))*((x)-(min))/((max)-(min)))+(a)
-# define WINDOW_W 800
-# define WINDOW_H 600
-# define BORDER 100
+# define WINDOW_W 1280
+# define WINDOW_H 780
+# define BORDER 10
 
-typedef struct	s_pixel {
-	int				x;
-	int				y;
-	int				z;
-	struct s_pixel	*next;
-}				t_pixel;
+typedef struct	s_point {
+	int	x;
+	int	y;
+	int	z;
+	int	color;
+}				t_point;
 
-typedef struct	s_map {
+typedef struct	s_mlx {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	char	***xy;
+	char	***map;
 	int		w;
 	int		h;
 	int		ratio;
-}				t_map;
+	char	projection;
+}				t_mlx;
 
-t_map			*file_reader(char *input);
-int				***create_int_array(t_map *map);
+typedef struct s_image {
+	void	*ptr;
+	char	*data_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}				t_image;
+
+t_mlx			*file_reader(char *input);
+//int				***create_int_array(t_mlx *mlx);
 void			error_exit(char *reason);
-int				width(t_map *map);
-int				height(t_map *map);
-void			draw_map(t_map *map);
+//int				width(t_mlx *mlx);
+//int				height(t_mlx *mlx);
+void			render(t_mlx *mlx);
+t_point			project(t_point point, t_mlx *mlx);
+//void			draw_map(t_mlx *mlx);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:50 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/10 14:41:29 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:34:18 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,44 @@
 #include "libft/libft.h"
 #include <fcntl.h>
 
-int		deal_key(int key)//, t_map *map)
+int		deal_key(int key, t_mlx *mlx)
 {
 	ft_printf("%d\n", key);
 	if (key == 53)
 		exit(0);
-/*	if (key == 126)
+	if (key == 124)
 	{
-		map->ratio += 1;
-		mlx_clear_window(map->mlx_ptr, map->win_ptr);
-		draw_map(map);
+		ft_putendl("jep");
+		mlx_destroy_image(mlx->mlx_ptr, image->ptr);
+		ft_putendl("wut");
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		ft_putendl("omg");
+		mlx->projection = 0;
+		ft_putendl("hello");
+		render(mlx);
+		ft_putendl("kek");
 	}
-	if (key == 125)
+	if (key == 123)
 	{
-		map->ratio -= 1;
-		mlx_clear_window(map->mlx_ptr, map->win_ptr);
-		draw_map(map);
-	}*/
+		mlx->projection = 1;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		render(mlx);
+	}
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	t_map	*map;
-//	int		***array;
+	t_mlx	*mlx;
 
 	if (argc != 2)
 		error_exit("Usage: ./fdf file.fdf");
-	map = file_reader(argv[1]);
-	map->mlx_ptr = mlx_init();
-	map->win_ptr = mlx_new_window(map->mlx_ptr, WINDOW_W + 2 * BORDER, WINDOW_H + 2 * BORDER, "fdf");
-	draw_map(map);
-//	mlx_pixel_put(mlx_ptr, win_ptr, 0, 0, 0xfff647);
-	mlx_key_hook(map->win_ptr, deal_key, (void *)0);
-/*	ft_putnbr(map->ratio);
-	ft_putnbr(map->w);
-	ft_putnbr(map->h);
-	size_t	i = 0;
+	mlx = file_reader(argv[1]);
+	mlx->mlx_ptr = mlx_init();
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WINDOW_W, WINDOW_H, "fdf");
+	render(mlx);
+	mlx_key_hook(mlx->win_ptr, deal_key, (void *)0);
+	/*	size_t	i = 0;
 	size_t	j = 0;
 	while (map->xy[i])
 	{
@@ -61,7 +62,10 @@ int		main(int argc, char **argv)
 			ft_printf(map->xy[i][j++]);
 		ft_printf("\n");
 		i++;
-	}*/
-	mlx_loop(map->mlx_ptr);
+	}
+//	ft_putchar('\n');
+	ft_putnbr(ft_atoi(map->xy[2][5]));
+	ft_putnbr(ft_atoi(map->xy[2][6]));*/
+	mlx_loop(mlx->mlx_ptr);
 	return (0);
 }
