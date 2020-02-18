@@ -6,13 +6,13 @@
 #    By: jhallama <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:10:31 by jhallama          #+#    #+#              #
-#    Updated: 2020/02/14 15:18:31 by jhallama         ###   ########.fr        #
+#    Updated: 2020/02/17 17:44:52 by jhallama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = fdf.c file_reader.c error_exit.c render.c project.c
+SRC = fdf.c file_reader.c error_exit.c render.c project.c color.c
 
 HEADERS = -I fdf.h
 

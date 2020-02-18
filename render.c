@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:34:17 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 15:48:16 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/18 16:01:20 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static t_point	create_point(int x, int y, t_mlx *mlx)
 	point.x = x;
 	point.y = y;
 	point.z = ft_atoi(mlx->map[y][x]);
-	point.color = 0xFFFFFF;
+	point.color = default_colors(point, mlx);
 	return (point);
 }
 
-static void		draw_line(t_point p0, t_point p1, t_image *image)
+static void		draw_line(t_point p0, t_point p1, t_mlx *mlx)
 {
 	int	dx;
 	int sx;
@@ -53,7 +53,7 @@ static void		draw_line(t_point p0, t_point p1, t_image *image)
 	error[0] = dx + dy;
 	while (p0.x != p1.x || p0.y != p1.y)
 	{
-		pixel_put(p0.x, p0.y, image, 0xFFFFFF);
+		pixel_put(p0.x, p0.y, &mlx->image, p0.color); //get_color(p0, p1, mlx, dx, dy));
 		error[1] = 2 * error[0];
 		error[0] += error[1] >= dy ? dy : 0;
 		p0.x += error[1] >= dy ? sx : 0;
@@ -87,15 +87,15 @@ void			render(t_mlx *mlx)
 			if (mlx->map[i][j + 1])
 			{
 				draw_line(project(create_point(j, i, mlx), mlx),
-					project(create_point(j + 1, i, mlx), mlx), &mlx->image);
+					project(create_point(j + 1, i, mlx), mlx), mlx);
 			}
 			if (mlx->map[i + 1] && mlx->map[i + 1][j])
 			{
 				draw_line(project(create_point(j, i, mlx), mlx),
-					project(create_point(j, i + 1, mlx), mlx), &mlx->image);
+					project(create_point(j, i + 1, mlx), mlx), mlx);
 			}
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
-			mlx->image.ptr, BORDER, BORDER);
+			mlx->image.ptr, 0, 0);
 }

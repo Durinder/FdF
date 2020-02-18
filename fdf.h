@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/17 15:44:28 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:55:20 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ typedef struct	s_mlx {
 	int		h;
 	int		ratio;
 	char	projection;
+	int		move_v;
+	int		move_h;
+	int		flatten;
+	int		max_z;
+	int		min_z;
 	t_image	image;
 }				t_mlx;
 
@@ -51,4 +56,7 @@ t_mlx			*file_reader(char *input);
 void			error_exit(char *reason);
 void			render(t_mlx *mlx);
 t_point			project(t_point point, t_mlx *mlx);
+void			color_ranges(t_mlx *mlx);
+int				get_color(t_point p0, t_point p1, t_mlx *mlx, int dx, int dy);
+int				default_colors(t_point point, t_mlx *mlx);
 #endif
