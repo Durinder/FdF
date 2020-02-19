@@ -6,33 +6,32 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:50 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/18 14:33:38 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:21:13 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft/get_next_line.h"
 #include "libft/libft.h"
-#include "libft/ft_printf/ft_printf.h"
 
 int		deal_key_move(int key, t_mlx *mlx)
 {
 	if (key == 123 || key == 124)
 	{
 		mlx->move_h += (key == 123) ? -5 : 5;
-		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_image(mlx->mlx_ptr, mlx->image.ptr);
 		render(mlx);
 	}
 	if (key == 125 || key == 126)
 	{
 		mlx->move_v += (key == 125) ? 5 : -5;
-		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_image(mlx->mlx_ptr, mlx->image.ptr);
 		render(mlx);
 	}
 	if (key == 75 || key == 67)
 	{
 		mlx->flatten += (key == 75) ? -1 : 1;
-		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_image(mlx->mlx_ptr, mlx->image.ptr);
 		color_ranges(mlx);
 		render(mlx);
 	}
@@ -49,13 +48,13 @@ int		deal_key(int key, t_mlx *mlx)
 			mlx->projection = 0;
 		else
 			mlx->projection = 1;
-		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_image(mlx->mlx_ptr, mlx->image.ptr);
 		render(mlx);
 	}
 	if (key == 69 || key == 78)
 	{
 		mlx->ratio += (key == 69) ? 1 : -1;
-		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_image(mlx->mlx_ptr, mlx->image.ptr);
 		render(mlx);
 	}
 	deal_key_move(key, mlx);
