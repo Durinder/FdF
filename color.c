@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:20:48 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/18 16:10:36 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 11:50:53 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,46 @@
 #include "libft/libft.h"
 #include "libft/ft_printf/ft_printf.h"
 
-static int	calculate(t_point p0, t_point p1,
-		double percentage)
+static int		calculate(int start, int end, double percentage)
 {
-	return ((1 - percentage) * p0.x + percentage * p1.x);
+	return ((1 - percentage) * start + percentage * end);
 }
 
-int			get_color(t_point p0, t_point p1, t_mlx *mlx, int dx, int dy)
+static double	ratio(int start, int current, int end)
+{
+	double	result;
+	int		distance;
+	int		waypoint;
+
+	distance = end - start;
+	if (distance == 0)
+		return (1.0);
+	waypoint = current - start;
+	result = waypoint / distance;
+	return (waypoint / distance);
+}
+
+int				get_color(t_point start, t_point current, t_point end, int d[2])
 {
 	double	percentage;
-	int 	red;
-	int		green;
-	int 	blue;
+	int		r;
+	int		g;
+	int		b;
 
-	ft_putnbr(dx);
-	ft_putnbr(dy);
-	percentage = p0.z / (mlx->max_z - mlx->min_z);
-	red = 0x000000 & calculate(p0, p1, percentage);
-	blue = 0x000000 & calculate(p0, p1, percentage);
-	green = 0x000000 & calculate(p0, p1, percentage);
-	return ((red << 16) | (green << 8) | blue);
+	if (d[0] > d[1])
+		percentage = ratio(start.x, current.x, end.x);
+	else
+		percentage = ratio(start.y, current.y, end.y);
+	r = calculate(current.color >> 16 & 0xFF,
+			end.color >> 16 & 0xFF, percentage);
+	g = calculate(current.color >> 8 & 0xFF,
+			end.color >> 8 & 0xFF, percentage);
+	b = calculate(current.color & 0xFF,
+			end.color & 0xFF, percentage);
+	return ((r << 16) | (g << 8) | b);
 }
 
-int			default_colors(t_point point, t_mlx *mlx)
+int				default_colors(t_point point, t_mlx *mlx)
 {
 	double	percentage;
 	double	tmp_max;
@@ -63,7 +80,7 @@ int			default_colors(t_point point, t_mlx *mlx)
 		return (0x900C3F);
 }
 
-void		color_ranges(t_mlx *mlx)
+void			color_ranges(t_mlx *mlx)
 {
 	size_t	i;
 	size_t	j;
@@ -86,5 +103,4 @@ void		color_ranges(t_mlx *mlx)
 					(mlx->flatten);
 		}
 	}
-//	ft_printf("min: %d, max: %d\n", mlx->min_z, mlx->max_z);
 }

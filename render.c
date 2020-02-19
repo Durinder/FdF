@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:34:17 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/18 16:01:20 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 11:51:50 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ static t_point	create_point(int x, int y, t_mlx *mlx)
 
 static void		draw_line(t_point p0, t_point p1, t_mlx *mlx)
 {
-	int	dx;
-	int sx;
-	int dy;
-	int	sy;
-	int	error[2];
+	int		d[2];
+	int		s[2];
+	int		error[2];
+	t_point	start;
 
-	dx = abs(p1.x - p0.x);
-	sx = p0.x < p1.x ? 1 : -1;
-	dy = -abs(p1.y - p0.y);
-	sy = p0.y < p1.y ? 1 : -1;
-	error[0] = dx + dy;
+	start = p0;
+	d[0] = abs(p1.x - p0.x);
+	s[0] = p0.x < p1.x ? 1 : -1;
+	d[1] = -abs(p1.y - p0.y);
+	s[1] = p0.y < p1.y ? 1 : -1;
+	error[0] = d[0] + d[1];
 	while (p0.x != p1.x || p0.y != p1.y)
 	{
-		pixel_put(p0.x, p0.y, &mlx->image, p0.color); //get_color(p0, p1, mlx, dx, dy));
+		pixel_put(p0.x, p0.y, &mlx->image, get_color(start, p0, p1, d));
 		error[1] = 2 * error[0];
-		error[0] += error[1] >= dy ? dy : 0;
-		p0.x += error[1] >= dy ? sx : 0;
-		error[0] += error[1] <= dx ? dx : 0;
-		p0.y += error[1] <= dx ? sy : 0;
+		error[0] += error[1] >= d[1] ? d[1] : 0;
+		p0.x += error[1] >= d[1] ? s[0] : 0;
+		error[0] += error[1] <= d[0] ? d[0] : 0;
+		p0.y += error[1] <= d[0] ? s[1] : 0;
 	}
 }
 

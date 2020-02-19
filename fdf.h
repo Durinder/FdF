@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:42 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/18 13:55:20 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 11:51:21 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			error_exit(char *reason);
 void			render(t_mlx *mlx);
 t_point			project(t_point point, t_mlx *mlx);
 void			color_ranges(t_mlx *mlx);
-int				get_color(t_point p0, t_point p1, t_mlx *mlx, int dx, int dy);
+int				get_color(t_point start, t_point current,
+		t_point end, int d[2]);
 int				default_colors(t_point point, t_mlx *mlx);
 #endif
