@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:20:48 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/19 11:50:53 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:34:38 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int		calculate(int start, int end, double percentage)
 static double	ratio(int start, int current, int end)
 {
 	double	result;
-	int		distance;
-	int		waypoint;
+	double	distance;
+	double	waypoint;
 
 	distance = end - start;
 	if (distance == 0)
@@ -40,7 +40,7 @@ int				get_color(t_point start, t_point current, t_point end, int d[2])
 	int		g;
 	int		b;
 
-	if (d[0] > d[1])
+	if (abs(d[0]) > abs(d[1]))
 		percentage = ratio(start.x, current.x, end.x);
 	else
 		percentage = ratio(start.y, current.y, end.y);
@@ -67,17 +67,17 @@ int				default_colors(t_point point, t_mlx *mlx)
 		return (0xFFFFFF);
 	percentage = fabs(point.z / (tmp_max - tmp_min));
 	if (percentage < 0.17)
-		return (0xFDFEFE);
+		return (0xA1FFFD);
 	if (percentage < 0.33)
-		return (0xDAF7A6);
+		return (0x00FFC5);
 	if (percentage < 0.5)
-		return (0xFFC300);
+		return (0x00FF04);
 	if (percentage < 0.67)
-		return (0xFF5733);
+		return (0xE5FF00);
 	if (percentage < 0.83)
-		return (0xC70039);
+		return (0xFF7C00);
 	else
-		return (0x900C3F);
+		return (0xFF0000);
 }
 
 void			color_ranges(t_mlx *mlx)
