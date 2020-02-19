@@ -6,12 +6,12 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:34:17 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/19 11:51:50 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:29:29 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft/ft_printf/ft_printf.h"
+#include "libft/libft.h"
 
 static void		pixel_put(int x, int y, t_image *image, int color)
 {

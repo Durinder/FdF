@@ -6,12 +6,11 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:42:50 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/19 14:21:13 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:24:45 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft/get_next_line.h"
 #include "libft/libft.h"
 
 int		deal_key_move(int key, t_mlx *mlx)

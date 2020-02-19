@@ -6,13 +6,12 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:20:48 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/19 12:34:38 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:23:03 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft/libft.h"
-#include "libft/ft_printf/ft_printf.h"
 
 static int		calculate(int start, int end, double percentage)
 {
