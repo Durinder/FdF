@@ -6,7 +6,7 @@
 /*   By: jhallama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:44:36 by jhallama          #+#    #+#             */
-/*   Updated: 2020/02/14 16:32:35 by jhallama         ###   ########.fr       */
+/*   Updated: 2020/02/21 11:47:19 by jhallama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_mlx		*file_reader(char *input)
 	if ((fd = open(input, O_RDONLY)) == -1)
 		error_exit("open() failed");
 	mlx->h = line_count(input);
-	mlx->map = (char ***)malloc(sizeof(char **) * mlx->h);
+	mlx->map = (char ***)malloc(sizeof(char **) * (mlx->h + 1));
+	mlx->map[mlx->h] = NULL;
 	i = 0;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
